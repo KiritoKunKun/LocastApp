@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<h2>Cadastro</h2>
+
+    <body>
+        <form action="/employee" method="POST">
+            <input type="hidden" name="_id" value="{{employee._id}}">
+            
+            <div class="row" style="margin-top: 50px; margin-left: 50px; margin-right: 120px">
+                <div class="column" style="padding-left: 20px">
+                    <label for="nome">Nome da Empresa</label> <br>
+                    <input type="text" name="nome" id="nome" size="40" value="{{employee.nome}}" maxlength="100" autofocus required>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="cpf_cnpj">CNPJ</label> <br>
+                    <input type="text" name="cpf_cnpj" id="cpf_cnpj" size="30" value="{{employee.cpf_cnpj}}" maxlength="18" OnKeyPress="formatar('##.###.###/####-##', this)">
+                </div>
+                
+                <div class="column" style="padding-left: 20px">
+                    <label for="cep">CEP</label> <br>
+                    <input type="text" name="cep" id="cep" size="20" value="{{employee.cep}}" maxlength="9" OnKeyPress="formatar('#####-###', this)">
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="endereco">Endereço</label> <br>
+                    <input type="text" name="endereco" id="endereco" size="100" value="{{employee.endereco}}" maxlength="100">
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="cidade">Cidade</label> <br>
+                    <input type="text" name="cidade" id="cidade" size="30" value="{{employee.cidade}}" maxlength="100" autofocus>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="estado">Estado</label> <br>
+                    <input type="text" name="estado" id="estado" size="30" value="{{employee.estado}}" maxlength="100">
+                </div>
+                
+                <div class="column" style="padding-left: 20px">
+                    <label for="dataEmissao">Data de Emissão</label> <br>
+                    <input type="text" name="dataEmissao" id="dataEmissao" size="30" value="{{employee.dataEmissao}}" maxlength="10" autofocus OnKeyPress="formatar('##/##/####', this)">
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="descricao">Descrição</label> <br>
+                    <textarea name="descricao" id="descricao" value="{{employee.descricao}}" tabindex="5" maxlength="500" rows="10" cols="50"></textarea>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="valor">Valor</label> <br>
+                    <textarea name="valor" id="valor" value="{{employee.valor}}" tabindex="5" maxlength="600" rows="10" cols="25"></textarea>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="vencimento">Vencimento</label> <br>
+                    <input type="text" name="vencimento" id="vencimento" size="30" value="{{employee.vencimento}}" maxlength="10" autofocus OnKeyPress="formatar('##/##/####', this)">
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="condicoesPagamento">Condições de Pagamento</label> <br>
+                    <input type="text" name="condicoesPagamento" id="condicoesPagamento" size="30" value="{{employee.condicoesPagamento}}" maxlength="100" autofocus>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="valorTotal">Valor Total</label> <br>
+                    <input type="text" name="valorTotal" id="valorTotal" size="30" value="{{employee.valorTotal}}" maxlength="30" autofocus>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="observacoes">Observações</label> <br>
+                    <textarea name="observacoes" id="observacoes" value="{{employee.observacoes}}" tabindex="5" maxlength="600" rows="10" cols="130"></textarea>
+                </div>
+
+                <div class="column" style="padding-left: 20px">
+                    <label for="numeroFatura">Número da Fatura</label> <br>
+                    <input type="text" name="number" id="numeroFatura" size="30" value="{{employee.number}}" maxlength="30" autofocus>
+                </div>
+            </div>
+            
+            <script>
+                document.getElementById("descricao").value = '{{employee.descricao}}';
+                document.getElementById("valor").value = '{{employee.valor}}';
+                document.getElementById("observacoes").value = '{{employee.observacoes}}';
+
+                var newText = document.getElementById("descricao").value;
+                newText = newText.replace(/(&quot\;)/g,"\"");
+                newText = newText.replace(/[\\"]/g, '');
+                document.getElementById("descricao").value = newText;
+
+                newText = document.getElementById("valor").value;
+                newText = newText.replace(/(&quot\;)/g,"\"");
+                newText = newText.replace(/[\\"]/g, '');
+                document.getElementById("valor").value = newText;
+
+                newText = document.getElementById("observacoes").value;
+                newText = newText.replace(/(&quot\;)/g,"\"");
+                newText = newText.replace(/[\\"]/g, '');
+                document.getElementById("observacoes").value = newText;
+                
+                function toJSON() {
+                    document.getElementById("descricao").value = JSON.stringify(document.getElementById("descricao").value);
+                    document.getElementById("valor").value = JSON.stringify(document.getElementById("valor").value);
+                    document.getElementById("observacoes").value = JSON.stringify(document.getElementById("observacoes").value);
+                }
+            </script>
+
+            <script>
+                function formatar(mascara, documento){
+                    var i = documento.value.length;
+                    var saida = mascara.substring(0,1);
+                    var texto = mascara.substring(i)
+                    
+                    if (texto.substring(0,1) != saida){
+                        documento.value += texto.substring(0,1);
+                    }
+                
+                }
+            </script>
+
+            <br>
+            <button type="submit" class="btn btn-info" onclick="toJSON()"><i class="fa fa-database"></i> Cadastrar</button>
+            <a class="btn btn-secondary" href="/employee/list"><i class="fa fa-list-alt"></i> Lista de Clientes</a>
+        </form>
+    </body>
