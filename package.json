@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "handlebars-helpers": "^0.10.0",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "mongoose": "^5.6.4",
     "nodemon": "^1.19.1",
     "yarn": "^1.17.3"
